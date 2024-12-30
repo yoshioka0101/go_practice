@@ -213,3 +213,35 @@ Hello World
 Xello World
 */
 ```
+
+### 配列操作
+- 配列は以下のように記載する
+- また配列を追加する場合に`append`を使用することで要素を追加することができる
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	n := []int{1,2,3,4,5}
+	fmt.Println(n)
+	fmt.Println(n[2:4])
+	fmt.Println(n[:2])
+	fmt.Println(n[2:])
+	n[2] = 1000
+	fmt.Println(n)
+	n = append(n,100,200,300)
+	fmt.Println(n)
+}
+
+/*出力
+$ go run lesson1_4.go 
+[1 2 3 4 5]
+[3 4]
+[1 2]
+[3 4 5]
+[1 2 1000 4 5]
+[1 2 1000 4 5 100 200 300]
+*/
+```
