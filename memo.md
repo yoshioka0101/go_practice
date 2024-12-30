@@ -245,3 +245,86 @@ $ go run lesson1_4.go
 [1 2 1000 4 5 100 200 300]
 */
 ```
+
+#### 多次元配列
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var board = [][]int{
+		[]int{0, 1 ,2},
+		[]int{3, 4, 5},
+		[]int{6, 7, 8},
+	}
+	fmt.Println(board)
+	fmt.Println(board[1])
+	fmt.Println(board[1][2])
+	fmt.Println(board[2][2])
+	fmt.Println(board[0][0])
+}
+
+/*出力
+$ go run lesson1_4.go 
+[[0 1 2] [3 4 5] [6 7 8]]
+[3 4 5]
+5
+8
+0
+*/
+
+```
+
+- make関数
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	n := make([]int, 3, 5)
+	fmt.Println(n)
+	n = append(n,0,0)
+	fmt.Println(n)
+	n = append(n,1,2,3,4,5,6)
+	fmt.Println(n)
+}
+/*出力
+$ go run lesson1_4.go 
+[0 0 0]
+[0 0 0 0 0]
+[0 0 0 0 0 1 2 3 4 5 6]
+*/
+```
+
+- `map`関数を用いた多次元配列
+
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	n := map[string]int{"apple": 100 , "banana": 200}
+	fmt.Println(n)
+	// appleのキーと紐づいたバリューを出力する
+	fmt.Println(n["apple"])
+	// bananaの値を300にする
+	n["banana"] = 300
+	fmt.Println(n)
+	//　Suikaを追加する
+	n["Suika"] = 500
+	fmt.Println(n)
+}
+
+// $ go run lesson1_4.go 
+// map[apple:100 banana:200]
+// 100
+// map[apple:100 banana:300]
+// map[Suika:500 apple:100 banana:300]
+
+```
