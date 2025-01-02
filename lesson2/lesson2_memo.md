@@ -104,3 +104,70 @@ func main(){
 	}
 }
 ```
+
+### panic
+- `panic`関数で処理を止めることをプログラムで示します
+
+```go
+package main
+
+import "fmt"
+
+// thirdPartyConnectDB内でpanic関数を実行します
+func thirdPartyConnectDB(){
+	panic("Unable to connect database")
+}
+
+// save関数はthirdPartyConnectDB関数を実行します
+func save(){
+	thirdPartyConnectDB()
+}
+
+// main関数が最初に実行され、そこにあるsave関数を実行します
+func main(){
+	save()
+	fmt.Println("OK?")
+}
+```
+
+```sh
+$ go run lesson2_7.go 
+panic: Unable to connect database
+
+goroutine 1 [running]:
+main.thirdPartyConnectDB(...)
+        /home/opm007756.linux/go_book/go_professional/lesson2/lesson2_7.go:6
+main.save(...)
+        /home/opm007756.linux/go_book/go_professional/lesson2/lesson2_7.go:10
+main.main()
+        /home/opm007756.linux/go_book/go_professional/lesson2/lesson2_7.go:14 +0x34
+exit status 2
+
+```
+
+- recove関数を使うことでエラーを潰せる
+
+```go
+
+package main
+
+import "fmt"
+
+func thirdPartyConnectDB(){
+	panic("Unable to connect database")
+}
+
+func save(){
+	thirdPartyConnectDB()
+
+	defer func() {
+		s := recover()
+		fmt.Println(s)
+	}()
+}
+
+func main(){
+	save()
+	fmt.Println("OK?")
+}
+```
