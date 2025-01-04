@@ -66,3 +66,33 @@ func main(){
 	fmt.Println("通常の関数:",v.Area())
 }
 ```
+
+####  継承
+
+- 資料にある問題ではなくて、Rubyでよくある親クラス、子クラスの話をしてみた
+  - AnimalはいかにDocが存在していて、Animalで定義したSpeakメソッドをDocで使用する
+
+
+```go
+package main
+
+import "fmt"
+
+type Animal struct{}
+
+func (a Animal) Speake() string{
+    return "Iam Animal"
+}
+
+// ここで継承元のメソッドを使用できる
+type Docs struct{
+    Animal
+}
+
+func main(){
+    // Rails のnew.ckass名みたいなもの
+    doc := Doc{}
+    fmt.Println(doc.Speak)
+}
+
+```
